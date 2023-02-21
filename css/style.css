@@ -11,10 +11,15 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  min-height: 100vh;
+  overflow-x: hidden !important;
 }
 
 .header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -95,8 +100,11 @@ body {
 }
 
 .cart {
+  position: relative;
   display: flex;
   align-items: center;
+  width: -moz-max-content;
+  width: max-content;
 }
 .cart__img {
   height: 25px;
@@ -107,6 +115,7 @@ body {
   }
 }
 .cart__text {
+  word-wrap: none;
   font-size: 1.2rem;
 }
 @media screen and (min-width: 1200px) {
@@ -114,10 +123,26 @@ body {
     font-size: 1.4rem;
   }
 }
+.cart__clear {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  border: none;
+  background-color: transparent;
+  color: yellow;
+  cursor: pointer;
+}
+.cart__clear--active {
+  display: block;
+}
 
 .main {
+  min-height: calc(100vh - 80px);
   width: 90%;
   margin: 0 auto;
+  padding-bottom: 50px;
 }
 @media screen and (min-width: 1300px) {
   .main {
@@ -181,14 +206,21 @@ body {
   }
 }
 .categories__category {
-  padding: 5px 10px;
+  width: 30%;
+  padding: 5px;
   background-color: transparent;
   border: 1px solid black;
   border-radius: 10px;
   cursor: pointer;
 }
+@media screen and (min-width: 500px) {
+  .categories__category {
+    width: 100px;
+  }
+}
 @media screen and (min-width: 1300px) {
   .categories__category {
+    width: 100%;
     border-radius: 5px;
     padding: 10px;
   }
@@ -199,6 +231,7 @@ body {
 }
 
 .product {
+  align-self: flex-start;
   width: 80%;
   max-width: 300px;
   padding: 10px 5px;
@@ -232,6 +265,7 @@ body {
   position: relative;
   font-size: 1.2rem;
   margin-right: 5px;
+  display: none;
 }
 .product__oldPrice::after {
   content: "";
@@ -254,4 +288,21 @@ body {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+}
+.product--sale {
+  position: relative;
+}
+.product--sale .product__oldPrice {
+  display: inline;
+}
+.product--sale::after {
+  content: "Promocja";
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.3rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: yellow;
+  padding: 5px 10px;
+  border-radius: 10px;
 }/*# sourceMappingURL=style.css.map */

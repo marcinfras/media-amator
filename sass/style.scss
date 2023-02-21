@@ -12,10 +12,15 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  min-height: 100vh;
+  overflow-x: hidden !important;
 }
 
 .header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -96,8 +101,10 @@ body {
 }
 
 .cart {
+  position: relative;
   display: flex;
   align-items: center;
+  width: max-content;
 
   &__img {
     height: 25px;
@@ -108,17 +115,36 @@ body {
   }
 
   &__text {
+    word-wrap: none;
     font-size: 1.2rem;
 
     @media screen and (min-width: 1200px) {
       font-size: 1.4rem;
     }
   }
+
+  &__clear {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    border: none;
+    background-color: transparent;
+    color: yellow;
+    cursor: pointer;
+
+    &--active {
+      display: block;
+    }
+  }
 }
 
 .main {
+  min-height: calc(100vh - 80px);
   width: 90%;
   margin: 0 auto;
+  padding-bottom: 50px;
 
   @media screen and (min-width: 1300px) {
     display: flex;
@@ -146,6 +172,10 @@ body {
       width: 80%;
       margin: 70px auto;
     }
+
+    // &--empty::after {
+    //   content: "Nic nie znaleziono...";
+    // }
   }
 }
 
@@ -181,13 +211,19 @@ body {
   }
 
   &__category {
-    padding: 5px 10px;
+    width: 30%;
+    padding: 5px;
     background-color: transparent;
     border: 1px solid black;
     border-radius: 10px;
     cursor: pointer;
 
+    @media screen and (min-width: 500px) {
+      width: 100px;
+    }
+
     @media screen and (min-width: 1300px) {
+      width: 100%;
       border-radius: 5px;
       padding: 10px;
     }
@@ -200,6 +236,7 @@ body {
 }
 
 .product {
+  align-self: flex-start;
   width: 80%;
   max-width: 300px;
   padding: 10px 5px;
@@ -243,6 +280,7 @@ body {
     position: relative;
     font-size: 1.2rem;
     margin-right: 5px;
+    display: none;
 
     &::after {
       content: "";
@@ -268,5 +306,24 @@ body {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+  }
+
+  &--sale {
+    position: relative;
+    .product__oldPrice {
+      display: inline;
+    }
+
+    &::after {
+      content: "Promocja";
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 1.3rem;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: yellow;
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
   }
 }
