@@ -7,23 +7,10 @@ const cartText = document.querySelector(".cart__text");
 const clearBtn = document.querySelector(".cart__clear");
 let price = 0;
 
-/*
-<div class="product">
-<img src="./images/huawei-1.jpg" alt="smartphone" class="product__img">
-<h2 class="product__model">Huawei p20</h2>
-<p class="product__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati quam ipsam praesentium unde iure minus pariatur temporibus enim architecto sunt!</p>
-<div class="product__price">
-    <span class="product__oldPrice">2999.99 zł</span>
-    <span class="product__currentPrice">2750 zł</span>
-</div>
-<button class="product__btn">Dodaj do koszyka</button>
-</div>
-*/
 const addToCart = (e) => {
   const value = Number(e.target.dataset.price);
   price += value;
   cartText.innerHTML = `${price.toFixed(2)}zł`;
-  console.log(price, value);
   clearBtn.className = `cart__clear cart__clear--active`;
   clearBtn.addEventListener("click", () => {
     price = 0;
@@ -64,18 +51,9 @@ const renderProducts = (items) => {
   });
 };
 
-/*
-<button class="categories__category categories__category--active">Kategoria</button>
-                <button class="categories__category">Kategoria</button>
-                <button class="categories__category">Kategoria</button>
-                <button class="categories__category">Kategoria</button>
-                <button class="categories__category">Kategoria</button>
-                */
-
 const changeCategory = (e) => {
   const category = e.target.dataset.category;
   e.target.classList.add("categories__category--active");
-  const btns = document.querySelectorAll(".categories__category");
   if (category === "wszystko") {
     currProducts = products;
   } else {
@@ -83,7 +61,6 @@ const changeCategory = (e) => {
       return product.category === category;
     });
   }
-  console.log(currProducts);
   renderProducts(currProducts);
 };
 
@@ -114,11 +91,9 @@ const renderCategory = (items) => {
 
 const search = (e) => {
   const text = e.target.value.toLowerCase();
-  console.log(text);
   const searchProducts = currProducts.filter((product) =>
     product.name.toLowerCase().includes(text)
   );
-  console.log(currProducts);
   renderProducts(searchProducts);
 };
 
